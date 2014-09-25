@@ -1,0 +1,9 @@
+package resources.generated;
+
+import public "package_name.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+message ImportPublicSecondLevel {
+  required PackageTest package_test_second = 1;
+}

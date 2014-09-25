@@ -10,7 +10,7 @@ package net.sandrogrzicic.scalabuff.compiler
  */
 sealed abstract class Node
 
-case class ImportStatement(packageName: String) extends Node
+case class ImportStatement(packageName: String, isPublic: Boolean = false) extends Node
 
 case class PackageStatement(packageName: String) extends Node
 

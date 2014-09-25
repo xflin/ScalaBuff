@@ -39,8 +39,8 @@ class Parser(val inputName: String) extends RegexParsers with PackratParsers {
 		case name ~ id => EnumConstant(name, id.toInt)
   }
 
-  lazy val importP: PackratParser[ImportStatement] = "import" ~> quotedStringConstant <~ ";" ^^ {
-		importedPackage => ImportStatement(importedPackage)
+  lazy val importP: PackratParser[ImportStatement] = "import" ~> ("public"?) ~ quotedStringConstant <~ ";" ^^ {
+		case isPublic ~ importedPackage => ImportStatement(importedPackage, isPublic.isDefined)
   }
 
   lazy val packageP: PackratParser[PackageStatement] = "package" ~> (identifier ~ (("." ~ identifier) *)) <~ ";" ^^ {
