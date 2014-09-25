@@ -154,6 +154,8 @@ class ScalaBuffTest extends FunSuite with ShouldMatchers {
     compile("package_name", Some("nested"))
     compile("import_packages", None)
     compile("import_use_fullname", None)
+    compile("import_public_second", None)
+    compile("import_public_top", None)
   }
 
   test("run: unknown option") {

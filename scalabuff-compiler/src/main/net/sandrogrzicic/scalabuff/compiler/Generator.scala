@@ -491,7 +491,7 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
             case Message(name, body)    => output.append(message(name, body))
             case Extension(name, body)  => // very similar to Message
             case e: EnumStatement       => output.append(enum(e))
-            case ImportStatement(name)  => imports += name
+            case ImportStatement(name, _)  => imports += name
             case PackageStatement(name) => if (packageName.isEmpty) packageName = name
             case OptionValue(key, value) => key match {
               case "java_package"         => packageName = value.stripQuotes
@@ -734,8 +734,8 @@ object Generator {
                 name == shortName || shortName.startsWith(name + ".")
             }.foreach {
               case (name, symbol) =>
-	              // namespaces might be empty for imported message types
-	              val namespacePrefix = if (symbol.packageName.isEmpty) "" else symbol.packageName + "."
+                // namespaces might be empty for imported message types
+                val namespacePrefix = if (symbol.packageName.isEmpty) "" else symbol.packageName + "."
                 val protoPkgPrefix = if (symbol.protoPackage.isEmpty) "" else symbol.protoPackage + "."
                 field.fType.scalaType = namespacePrefix + field.fType.scalaType.stripPrefix(protoPkgPrefix)
                 field.fType.defaultValue = namespacePrefix + field.fType.defaultValue.stripPrefix(protoPkgPrefix)

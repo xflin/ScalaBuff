@@ -1,0 +1,1 @@
+List(PackageStatement(resources.generated), ImportStatement("package_name.proto",true), OptionValue(optimize_for,LITE_RUNTIME), Message(ImportPublicSecondLevel,MessageBody(List(Field(required,PackageTest,package_test_second,1,List(),)),List(),List(),List(),List(),List(),List())))

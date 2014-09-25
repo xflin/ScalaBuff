@@ -60,7 +60,7 @@ object ScalaBuff {
    * files and building a map of their exported symbols.
    */
   def processImportSymbols(tree: List[Node])(implicit settings: Settings = defaultSettings): Map[String, ImportedSymbol] = {
-    def dig(name: String): List[(String, ImportedSymbol)] = {
+    def dig(name: String, isPublic: Boolean): List[(String, ImportedSymbol)] = {
       val tree = parse(searchPath(name).getOrElse { throw new IOException("Unable to import: " + name) })
       val packageName = tree.collectFirst {
         case OptionValue(key, value) if key == "java_package" => value.stripQuotes
@@ -71,10 +71,12 @@ object ScalaBuff {
       tree.collect {
         case Message(name, _) => (name, ImportedSymbol(packageName, false, protoPackage))
         case EnumStatement(name, _, _) => (name, ImportedSymbol(packageName, true, protoPackage))
-      }
+      } ++ (if (!isPublic) List() else tree.collect {
+        case ImportStatement(name, true) => dig(name.stripQuotes, true)
+      }).flatten
     }
     tree.collect {
-      case ImportStatement(name) => dig(name.stripQuotes)
+      case ImportStatement(name, isPublic) => dig(name.stripQuotes, isPublic)
     }.flatten.toMap
   }
 
