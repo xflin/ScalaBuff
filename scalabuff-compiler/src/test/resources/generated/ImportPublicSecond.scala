@@ -60,7 +60,7 @@ final case class ImportPublicSecondLevel (
 }
 
 object ImportPublicSecondLevel {
-	@reflect.BeanProperty val defaultInstance = new ImportPublicSecondLevel()
+	@beans.BeanProperty val defaultInstance = new ImportPublicSecondLevel()
 
 	def parseFrom(data: Array[Byte]): ImportPublicSecondLevel = defaultInstance.mergeFrom(data)
 	def parseFrom(data: Array[Byte], offset: Int, length: Int): ImportPublicSecondLevel = defaultInstance.mergeFrom(data, offset, length)

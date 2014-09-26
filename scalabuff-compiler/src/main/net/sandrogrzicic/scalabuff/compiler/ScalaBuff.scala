@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 object ScalaBuff {
 
   val defaultCharset: Charset = if (Charset.isSupported("utf-8")) Charset.forName("utf-8") else Charset.defaultCharset()
+  val runtimeScalaVersion = util.Properties.scalaPropOrNone("version.number")
 
   case class Settings(
                          outputDirectory: File = new File("." + File.separatorChar),
@@ -21,7 +22,7 @@ object ScalaBuff {
                          verbose: Boolean = false,
                          extraVerbose: Boolean = false,
                          generateJsonMethod: Boolean = false,
-                         targetScalaVersion: Option[String] = None
+                         targetScalaVersion: Option[String] = runtimeScalaVersion
                        )
 
   val defaultSettings = Settings()
