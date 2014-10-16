@@ -6,7 +6,7 @@ package resources.generated
 //import "package_name.proto"
 
 final case class ImportPublicSecondLevel (
-	`packageTestSecond`: resources.generated.nested.PackageTest = resources.generated.nested.PackageTest.defaultInstance
+	packageTestSecond: resources.generated.nested.PackageTest = resources.generated.nested.PackageTest.defaultInstance
 ) extends com.google.protobuf.GeneratedMessageLite
 	with com.google.protobuf.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[ImportPublicSecondLevel]
@@ -15,13 +15,13 @@ final case class ImportPublicSecondLevel (
 
 
 	def writeTo(output: com.google.protobuf.CodedOutputStream) {
-		output.writeMessage(1, `packageTestSecond`)
+		output.writeMessage(1, packageTestSecond)
 	}
 
 	def getSerializedSize = {
 		import com.google.protobuf.CodedOutputStream._
 		var __size = 0
-		__size += computeMessageSize(1, `packageTestSecond`)
+		__size += computeMessageSize(1, packageTestSecond)
 
 		__size
 	}
@@ -43,7 +43,7 @@ final case class ImportPublicSecondLevel (
 
 	def mergeFrom(m: ImportPublicSecondLevel) = {
 		ImportPublicSecondLevel(
-			m.`packageTestSecond`
+			m.packageTestSecond
 		)
 	}
 

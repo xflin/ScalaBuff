@@ -6,7 +6,7 @@ package net.sandrogrzicic.scalabuff.compiler
  */
 
 class BuffedString(str: String) {
-	import BuffedString.camelCaseRegex
+	import BuffedString.{camelCaseRegex, isKeyword}
 
 	/**
 	 * CamelCases this string, with the first letter uppercased.
@@ -17,7 +17,7 @@ class BuffedString(str: String) {
 	 * Generates a valid Scala identifier: 
 	 * camelCases this string, leaving the first letter lowercased and wraps it into backticks.
 	 */
-	def toScalaIdent = "`" + lowerCamelCase + "`"
+	def toScalaIdent = if (isKeyword(lowerCamelCase)) "`" + lowerCamelCase + "`" else lowerCamelCase
 	
 	/**
 	 * camelCases this string, with the first letter lowercased.
@@ -92,4 +92,10 @@ object BuffedString {
 	def indent(indentLevel: Int) = "\t" * indentLevel
 
 	val camelCaseRegex = """_(\w)""".r
+
+  val symbolTable = reflect.runtime.universe.asInstanceOf[reflect.internal.SymbolTable]
+
+  def isKeyword(word: String) =
+    symbolTable.nme.keywords.contains(symbolTable.TermName(word)) ||
+    symbolTable.javanme.keywords.contains(symbolTable.TermName(word))
 }

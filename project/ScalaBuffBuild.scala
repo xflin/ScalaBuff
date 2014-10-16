@@ -44,7 +44,8 @@ object ScalaBuffBuild extends Build {
 		),
 		
 		libraryDependencies ++= Seq(
-			"com.google.protobuf" % "protobuf-java" % "2.5.0"
+			"com.google.protobuf" % "protobuf-java" % "2.5.0",
+			"org.scala-lang" % "scala-reflect" % scalaVersion.value
 		) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
       case Some((2, scalaMajor)) if scalaMajor >= 10 =>
         Seq("org.scalatest" %% "scalatest" % "2.1.5" % "test") ++ (
