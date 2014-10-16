@@ -78,9 +78,9 @@ class ScalaBuffTest extends FunSuite with ShouldMatchers {
     val simpleProto = protoDir + testProto + ".proto"
     Console.withOut(new PrintStream(outputStream)) {
       ScalaBuff.run(Array("-v", "-v", "--generate_json_method", "--scala_out=" + outputDir, simpleProto))
-      val output = outputStream.toString.split("\r\n")
+      val output = outputStream.toString.split("\r?\n")
       output.length should be (3)
-      output(1) should startWith("Processing: ")
+      output.exists(_.startsWith("Processing: ")) should be(true)
     }
     val outputFile = new File(outputDir + SEP + resourcesGeneratedDir + testProto.camelCase + ".scala")
     outputFile should be('exists)
@@ -95,7 +95,8 @@ class ScalaBuffTest extends FunSuite with ShouldMatchers {
     val outputStream = new ByteArrayOutputStream()
     Console.withOut(new PrintStream(outputStream)) {
       ScalaBuff.run(Array("-v", "-v", "--scala_out=" + outputDir, "--proto_path=" + multiProtoDir))
-      outputStream.toString("utf-8").split("\n").size should be(2)
+      val output = outputStream.toString("utf-8").split("\r?\n")
+      output.filter(_.startsWith("Processing:")).size should be(2)
     }
 
     for (proto <- protoFiles) {

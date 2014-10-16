@@ -161,7 +161,8 @@ object ScalaBuff {
 
         val success = new AtomicBoolean(true)
 
-        for (file <- protoFiles.par) {
+        val currentOut = scala.Console.out // for testing
+        for (file <- protoFiles.par) scala.Console.withOut(currentOut) {
           verbosePrintln("Processing: " + file.getAbsolutePath)
           try {
             val scalaClass = apply(file)
