@@ -4,7 +4,7 @@
 package resources.generated.nested
 
 final case class PackageTest (
-	`requiredField`: Int = 0
+	requiredField: Int = 0
 ) extends com.google.protobuf.GeneratedMessageLite
 	with com.google.protobuf.MessageLite.Builder
 	with net.sandrogrzicic.scalabuff.Message[PackageTest]
@@ -13,13 +13,13 @@ final case class PackageTest (
 
 
 	def writeTo(output: com.google.protobuf.CodedOutputStream) {
-		output.writeInt32(1, `requiredField`)
+		output.writeInt32(1, requiredField)
 	}
 
 	def getSerializedSize = {
 		import com.google.protobuf.CodedOutputStream._
 		var __size = 0
-		__size += computeInt32Size(1, `requiredField`)
+		__size += computeInt32Size(1, requiredField)
 
 		__size
 	}
@@ -41,7 +41,7 @@ final case class PackageTest (
 
 	def mergeFrom(m: PackageTest) = {
 		PackageTest(
-			m.`requiredField`
+			m.requiredField
 		)
 	}
 
