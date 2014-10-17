@@ -10,4 +10,5 @@ There are three main changes in the master branch of this fork:
   - Fixed issue#85 When importing a proto with a package statement ScalaBuff generates incorrect Scala code.
   - Fixed issue#92 Missing support for "import public" notion in ScalaBuff.
   - Changed to use scala 2.11.x version.
+  - Removed backticks that wrap around generated words when they are neither Scala nor Java keywords.
 
