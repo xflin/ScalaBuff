@@ -11,4 +11,4 @@ There are three main changes in the master branch of this fork:
   - Fixed issue#92 Missing support for "import public" notion in ScalaBuff.
   - Changed to use scala 2.11.x version.
   - Removed backticks that wrap around generated words when they are neither Scala nor Java keywords.
-
+  - One hacky change: changed EnumVal type from Trait to case class so that Jackson JSON parse can serialize enum values properly.
