@@ -44,8 +44,8 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       val out = StringBuilder.newBuilder
       out
         .append(indentOuter).append("object ").append(enum.name).append(" extends net.sandrogrzicic.scalabuff.Enum {\n")
-        .append(indent).append("sealed trait EnumVal extends Value\n")
-        .append(indent).append("val _UNINITIALIZED = new EnumVal { val name = \"UNINITIALIZED ENUM VALUE\"; val id = -1 }\n\n")
+        .append(indent).append("case class EnumVal(val name: String, val id: Int) extends Value\n")
+        .append(indent).append("val _UNINITIALIZED = EnumVal(name = \"UNINITIALIZED ENUM VALUE\", id = -1)\n\n")
 
       for (enumOption <- enum.options) {
         // options?
@@ -53,10 +53,10 @@ class Generator protected (sourceName: String, importedSymbols: Map[String, Impo
       // declaration of constants
       for (const <- enum.constants) {
         out.append(indent)
-          .append("val ").append(const.name).append(" = new EnumVal { ")
-          .append("val name = \"").append(const.name).append("\"; ")
-          .append("val id = ").append(const.id)
-          .append(" }\n")
+          .append("val ").append(const.name).append(" = EnumVal(")
+          .append("name = \"").append(const.name).append("\", ")
+          .append("id = ").append(const.id)
+          .append(")\n")
       }
       out.append("\n")
       // constants, as statics
