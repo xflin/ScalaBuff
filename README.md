@@ -1,4 +1,4 @@
-[Note: This fork is no longer actively maintained as October 2014.]
+[Note: This fork is no longer actively maintained as of October 2014.]
 
 This is a fork from the [original ScalaBuff project](https://github.com/SandroGrzicic/ScalaBuff) with some changes.
 
